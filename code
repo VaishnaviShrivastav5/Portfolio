@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vaishnavi Shrivastava | ML & Data Science</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #121218;
+      --card: #1a1a24;
+      --accent: #7c6af7;
+      --accent2: #f07aac;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --border: #2a2a3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 40%, rgba(124,106,247,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(240,122,172,0.08) 0%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 750px; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(124,106,247,0.15);
+      border: 1px solid rgba(124,106,247,0.3);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff; text-decoration: none;
+      padding: 0.8rem 2rem; border-radius: 0.4rem;
+      font-size: 0.9rem; font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #6a59e0; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      padding: 0.8rem 2rem; border-radius: 0.4rem;
+      font-size: 0.9rem; font-weight: 500;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* hero stats */
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: var(--accent);
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-title span { color: var(--accent); }
+    .section-sub { color: var(--muted); max-width: 520px; font-size: 0.95rem; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+    .highlight-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0.4rem;
+    }
+    .highlight-card h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .highlight-card p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 1.8rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-category-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .skill-category h3 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      background: rgba(124,106,247,0.1);
+      border: 1px solid rgba(124,106,247,0.2);
+      color: var(--text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.78rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .project-card.featured { border-color: rgba(124,106,247,0.4); }
+    .project-badge {
+      display: inline-block;
+      background: rgba(240,122,172,0.15);
+      border: 1px solid rgba(240,122,172,0.3);
+      color: var(--accent2);
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.7rem; border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+    .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 0.6rem; }
+    .project-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .project-bullets { list-style: none; margin-bottom: 1.5rem; }
+    .project-bullets li {
+      font-size: 0.83rem; color: var(--muted);
+      padding: 0.25rem 0 0.25rem 1.2rem;
+      position: relative;
+    }
+    .project-bullets li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent); font-size: 0.7rem;
+    }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .tool-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.2rem 0.65rem;
+      border-radius: 0.3rem;
+      font-size: 0.75rem;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--accent); font-size: 0.82rem; text-decoration: none;
+      font-weight: 500;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; }
+
+    /* ── RESEARCH ── */
+    #research { background: var(--bg); }
+    .research-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      padding: 2.5rem;
+      max-width: 800px;
+      position: relative;
+      overflow: hidden;
+    }
+    .research-card::after {
+      content: '"';
+      position: absolute; right: 2rem; top: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem; color: rgba(124,106,247,0.06);
+      line-height: 1;
+    }
+    .research-journal {
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+    .research-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; }
+    .research-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .research-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .research-meta span { font-size: 0.8rem; color: var(--muted); }
+    .research-meta strong { color: var(--text); }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--surface); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 1.4rem 1.6rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color 0.3s;
+    }
+    .cert-card:hover { border-color: var(--accent); }
+    .cert-icon {
+      width: 36px; height: 36px; border-radius: 0.4rem;
+      background: rgba(124,106,247,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .cert-card h4 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.2rem; }
+    .cert-card p { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); text-align: center; }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-inner .section-sub { margin: 0 auto 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      padding: 0.8rem 1.5rem; border-radius: 0.5rem;
+      font-size: 0.88rem;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-stats { gap: 1.5rem; }
+      section { padding: 4rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ Open to Internship / Job Opportunities</div>
+    <h1 class="hero-name">Vaishnavi<br/><span>Shrivastava</span></h1>
+    <p class="hero-sub">ML Engineer & Data Science enthusiast building intelligent models that solve real-world problems — from personality detection to ad performance prediction.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View My Projects</a>
+      <a href="#contact" class="btn-outline">Contact Me →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">8.6+</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">ML Projects</div>
+      </div>
+      <div>
+        <div class="stat-num">1</div>
+        <div class="stat-label">Published Paper</div>
+      </div>
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">I turn data into <span>decisions</span></h2>
+      <p>I'm a <strong>Computer Science MSc student at Sharda University</strong> with a BCA background, specializing in Machine Learning and Data Science. I have hands-on experience building, training, and evaluating ML models on real-world datasets.</p>
+      <p>What sets me apart: I've already <strong>published a research paper</strong> at the undergraduate level — applying K-Means clustering and regression to detect narcissistic personality traits from psychological survey data.</p>
+      <p>I'm actively seeking an <strong>internship / job opportunity</strong> where I can contribute to impactful projects, grow fast, and deliver measurable results from day one.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <h4>🎓 M.Sc. Computer Science</h4>
+        <p>Sharda University · CGPA: 8.64 · 2025–2027</p>
+      </div>
+      <div class="highlight-card">
+        <h4>🎓 BCA (Bachelor of Computer Applications)</h4>
+        <p>Sharda University · CGPA: 8.56 · 2022–2025</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📄 Published Research Author</h4>
+        <p>IJRAR — "Narcissism Detection Using Machine Learning" · Vol. 12, Issue 2</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📍 Delhi, India</h4>
+        <p>Available for remote & on-site internships</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Skills</div>
+  <h2 class="section-title reveal">What I <span>work with</span></h2>
+  <p class="section-sub reveal">A focused toolkit built around real ML and data science workflows.</p>
+  <div class="skills-grid reveal">
+    <div class="skill-category">
+      <div class="skill-category-icon">🐍</div>
+      <h3>Programming</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Algorithms</span>
+        <span class="skill-tag">Logical Reasoning</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">🤖</div>
+      <h3>Machine Learning</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Supervised Learning</span>
+        <span class="skill-tag">Regression</span>
+        <span class="skill-tag">Classification</span>
+        <span class="skill-tag">K-Means Clustering</span>
+        <span class="skill-tag">Feature Engineering</span>
+        <span class="skill-tag">Model Evaluation</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">📦</div>
+      <h3>Libraries & Frameworks</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Scikit-Learn</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">TensorFlow</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">📊</div>
+      <h3>Data & Visualization</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Microsoft Excel</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-icon">🛠️</div>
+      <h3>Dev Tools</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">PyCharm</span>
+        <span class="skill-tag">Git & GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Projects</div>
+  <h2 class="section-title reveal">Things I've <span>built</span></h2>
+  <p class="section-sub reveal">Real projects — real datasets — real results.</p>
+  <div class="projects-grid reveal">
+
+    <div class="project-card featured">
+      <div class="project-badge">⭐ Research Project</div>
+      <h3>Narcissism Detection Using Machine Learning</h3>
+      <p>Applied ML to psychological data to detect narcissistic personality patterns — resulting in a published research paper.</p>
+      <ul class="project-bullets">
+        <li>Cleaned & pre-processed the Dirty Dozen psychological survey dataset</li>
+        <li>Applied K-Means clustering to identify behavioural personality groups</li>
+        <li>Built predictive models with Decision Tree & Random Forest</li>
+        <li>Evaluated using R² Score and Silhouette Score</li>
+        <li>Visualized psychological trait insights for interpretability</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Python</span>
+        <span class="tool-chip">Scikit-Learn</span>
+        <span class="tool-chip">K-Means</span>
+        <span class="tool-chip">Pandas</span>
+        <span class="tool-chip">Seaborn</span>
+        <span class="tool-chip">Random Forest</span>
+      </div>
+      <a href="https://github.com/" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">ML Project</div>
+      <h3>YouTube Ad View Prediction Model</h3>
+      <p>Built a regression model to predict advertisement view counts on YouTube, enabling smarter ad performance forecasting.</p>
+      <ul class="project-bullets">
+        <li>Collected and pre-processed ad performance data with Pandas & NumPy</li>
+        <li>Applied regression algorithms to predict view trends</li>
+        <li>Conducted competitor performance comparison analysis</li>
+        <li>Visualized results with Matplotlib & Seaborn for decision-making</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Python</span>
+        <span class="tool-chip">Pandas</span>
+        <span class="tool-chip">NumPy</span>
+        <span class="tool-chip">Regression</span>
+        <span class="tool-chip">Matplotlib</span>
+        <span class="tool-chip">Seaborn</span>
+      </div>
+      <a href="https://github.com/" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label reveal">Research</div>
+  <h2 class="section-title reveal">Published <span>Work</span></h2>
+  <p class="section-sub reveal">Research that bridges psychology and machine learning.</p>
+  <div class="research-card reveal">
+    <div class="research-journal">IJRAR · International Journal of Research and Analytical Reviews</div>
+    <h3>Narcissism Detection Using Machine Learning</h3>
+    <p>This research investigates the application of unsupervised and supervised machine learning techniques to identify narcissistic personality traits from psychological survey responses. Using the Dirty Dozen dataset, the study demonstrates that K-Means clustering can effectively segment personality groups, while regression and tree-based models achieve strong predictive accuracy.</p>
+    <div class="research-meta">
+      <span><strong>Volume:</strong> 12, Issue 2</span>
+      <span><strong>Published:</strong> July – Sep 2025</span>
+      <span><strong>Paper ID:</strong> IJRAR25B3369</span>
+    </div>
+    <a href="https://ijrar.org/" target="_blank" class="btn-primary" style="display:inline-block; font-size:0.85rem;">Read Paper →</a>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label reveal">Certifications</div>
+  <h2 class="section-title reveal">Courses & <span>Credentials</span></h2>
+  <div class="certs-grid reveal">
+    <div class="cert-card">
+      <div class="cert-icon">🧠</div>
+      <div>
+        <h4>Supervised ML: Regression & Classification</h4>
+        <p>DeepLearning.AI (Andrew Ng)</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div>
+        <h4>Machine Learning</h4>
+        <p>Internship Studio</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🐍</div>
+      <div>
+        <h4>Python and SQL for Data Science</h4>
+        <p>Scaler</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💬</div>
+      <div>
+        <h4>ChatGPT Prompt Engineering for Developers</h4>
+        <p>DeepLearning.AI</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📗</div>
+      <div>
+        <h4>Python for Beginners</h4>
+        <p>Scaler</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div>
+        <h4>Microsoft Excel</h4>
+        <p>Jobaaj Learning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal">Contact</div>
+    <h2 class="section-title reveal">Let's <span>Connect</span></h2>
+    <p class="section-sub reveal">I'm actively looking for new opportunities. If you think I'd be a good fit for your team, let's talk!</p>
+    <p class="reveal" style="font-size:1rem; color:var(--text); margin-bottom:2rem;">
+      📧 <strong>vaishnavishrivastav11@gmail.com</strong>
+    </p>
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/vaishnavi-shrivastava-76707428a" target="_blank" class="contact-link">
+        💼 LinkedIn
+      </a>
+      <a href="https://github.com/" target="_blank" class="contact-link">
+        🐙 GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Vaishnavi Shrivastava · 2025 · Delhi, India</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
